@@ -42,6 +42,7 @@ class Users extends Component {
                 })
 
                 this.setState({
+                    index: index,
                     posts: newPosts
                 })
 
