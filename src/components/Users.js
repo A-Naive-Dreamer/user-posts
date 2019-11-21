@@ -6,6 +6,7 @@ import Pagination from 'react-bootstrap/Pagination'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import NewPost from './NewPost'
+import Desert from '../assets/images/desert.jpg'
 
 class Users extends Component {
     constructor(props) {
@@ -188,6 +189,8 @@ class Users extends Component {
                         order: 2
                     }}
                     style={{
+                        backgroundImage: `url(${Desert})`,
+                        backgroundPosition: 'center',
                         height: window.innerHeight + 'px',
                         overflow: 'scroll'
                     }}
