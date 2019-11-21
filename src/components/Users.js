@@ -213,6 +213,10 @@ class Users extends Component {
                     >
                         {
                             this.state.posts.map((post, index) => {
+                                console.log('hai)
+                                console.log(post.userId)
+                                console.log(this.state.userId)
+                                console.log(post.userId !== this.state.userId)
                                 if(post.userId !== this.state.userId) return
 
                                 return (
