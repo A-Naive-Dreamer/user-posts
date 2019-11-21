@@ -20,3 +20,11 @@
 .App-link {
   color: #09d3ac;
 }
+
+h5 {
+  font-family: 'Calistoga';
+}
+
+.carousel {
+  background-image: url(./assets/images/cropped-1366-768-592993.jpg);
+}

@@ -20,16 +20,20 @@ export default class Cards1 extends Component {
                 width: '275px'
             }} className="d-block mx-auto" key={this.props.user.id}>
                 <Card.Title className="text-center text-danger">
-                    {
-                        this.props.user.name
-                    }
+                    <h2 style={{
+                        fontFamily: 'Aladin'
+                    }}>
+                        {
+                            this.props.user.name
+                        }
+                    </h2>
                 </Card.Title>
                 <Card.Body className="bg-info">
                     <Carousel indicators={false} interval={0}>
                         <Carousel.Item className="bio">
                             <h5>
                                 Username
-                                </h5>
+                            </h5>
                         </Carousel.Item>
                         <Carousel.Item className="description">
                             @{

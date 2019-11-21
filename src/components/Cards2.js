@@ -71,7 +71,9 @@ export default class Cards2 extends Component {
                 <Card.Title
                     className="text-center text-primary"
                     style={{
-                        display: (this.state.isVisible1 ? 'block' : 'none')
+                        fontFamily: 'Luckiest Guy',
+                        display: (this.state.isVisible1 ? 'block' : 'none'),
+                        padding: '10px 0'
                     }}
                     onClick={this.handleClick1}
                 >
