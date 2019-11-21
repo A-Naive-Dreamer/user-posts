@@ -25,7 +25,7 @@ class Users extends Component {
     }
 
     handleAddPost(title, body) {
-        let path = `https://jsonplaceholder.typicode.com/posts/`
+        let path = `${process.env.REACT_APP_API_PLACEHOLDER}/posts/`
 
         axios.post(path)
             .then(response => {
@@ -52,7 +52,7 @@ class Users extends Component {
     }
 
     handleDeletePost(index) {
-        let path = `https://jsonplaceholder.typicode.com/posts/${index + 1}`
+        let path = `${process.env.REACT_APP_API_PLACEHOLDER}/posts/${index + 1}`
 
         console.log(this.state.userId)
         axios.delete(path)
@@ -73,7 +73,7 @@ class Users extends Component {
     }
 
     handleEditTitle(index, title) {
-        let path = `https://jsonplaceholder.typicode.com/posts/${index + 1}`
+        let path = `${process.env.REACT_APP_API_PLACEHOLDER}/posts/${index + 1}`
         console.log(path)
 
         axios.put(path)
@@ -94,7 +94,7 @@ class Users extends Component {
     }
 
     handleEditBody(index, body) {
-        let path = `https://jsonplaceholder.typicode.com/posts/${index + 1}`
+        let path = `${process.env.REACT_APP_API_PLACEHOLDER}/posts/${index + 1}`
         console.log(path)
 
         axios.put(path)
@@ -122,7 +122,7 @@ class Users extends Component {
                 }
             }
         } = this.props,
-            path = `https://jsonplaceholder.typicode.com/users/${ID}/posts`
+            path = `${process.env.REACT_APP_API_PLACEHOLDER}/users/${ID}/posts`
 
         this.setState({
             userId: this.props.match.params.id
