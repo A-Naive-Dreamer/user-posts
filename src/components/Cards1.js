@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
+import { Link } from 'react-router-dom'
 
 export default class Cards1 extends Component {
     constructor(props) {
@@ -122,9 +123,9 @@ export default class Cards1 extends Component {
                     </Carousel>
                 </Card.Body>
                 <Card.Footer>
-                    <a className="text-success" href={`./users/${this.props.user.id}/pages/1`}>
+                    <Link className="text-success" to={`/users/${this.props.user.id}/pages/1`}>
                         Read More...
-                    </a>
+                    </Link>
                 </Card.Footer>
             </Card >
         )
