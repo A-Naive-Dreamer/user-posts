@@ -28,6 +28,8 @@ class Users extends Component {
     handleAddPost(title, body) {
         let path = `${process.env.REACT_APP_API_PLACEHOLDER}/posts/`
 
+        if (!window.confirm('Are you want to add the post?')) return
+
         axios.post(path)
             .then(response => {
                 let newPosts = this.state.posts,
@@ -56,6 +58,8 @@ class Users extends Component {
     handleDeletePost(index) {
         let path = `${process.env.REACT_APP_API_PLACEHOLDER}/posts/${index + 1}`
 
+        if (!window.confirm('Are you want to delete the post?')) return
+
         console.log(this.state.userId)
         axios.delete(path)
             .then(response => {
@@ -78,6 +82,8 @@ class Users extends Component {
         let path = `${process.env.REACT_APP_API_PLACEHOLDER}/posts/${index + 1}`
         console.log(path)
 
+        if (!window.confirm('Are you want to edit title of the post?')) return
+
         axios.put(path)
             .then(response => {
                 let newPosts = this.state.posts
@@ -98,6 +104,8 @@ class Users extends Component {
     handleEditBody(index, body) {
         let path = `${process.env.REACT_APP_API_PLACEHOLDER}/posts/${index + 1}`
         console.log(path)
+
+        if (!window.confirm('Are you want to edit body of the post?')) return
 
         axios.put(path)
             .then(response => {
