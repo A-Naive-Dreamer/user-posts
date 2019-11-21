@@ -213,6 +213,8 @@ class Users extends Component {
                     >
                         {
                             this.state.posts.map((post, index) => {
+                                if(post.userId !== this.state.userId) return
+
                                 return (
                                     <Cards2
                                         key={post.id}
