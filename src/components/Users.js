@@ -15,8 +15,8 @@ class Users extends Component {
         this.props = props
         this.state = {
             posts: [],
-            isSet: false,
             posts2: [],
+            keywords: '',
             index: 0,
             userId: 0
         }
@@ -26,6 +26,7 @@ class Users extends Component {
         this.handleDeletePost = this.handleDeletePost.bind(this)
         this.handleAddPost = this.handleAddPost.bind(this)
         this.searchForTitle = this.searchForTitle.bind(this)
+        this.searchForTitle2 = this.searchForTitle2.bind(this)
     }
 
     handleAddPost(title, body) {
@@ -35,21 +36,24 @@ class Users extends Component {
 
         axios.post(path)
             .then(response => {
-                let newPosts = this.state.posts,
+                let newPosts = this.state.posts2,
                     index = this.state.index
 
                 ++index
 
                 newPosts.push({
                     id: index,
+                    userId: index,
                     title: title,
                     body: body
                 })
 
                 this.setState({
                     index: index,
-                    posts: newPosts
+                    posts2: newPosts
                 })
+
+                this.searchForTitle2(this.state.keywords)
 
                 console.log(response)
             })
@@ -63,16 +67,21 @@ class Users extends Component {
 
         if (!window.confirm('Are you want to delete the post?')) return
 
-        console.log(this.state.userId)
         axios.delete(path)
             .then(response => {
-                let newPosts = this.state.posts
+                let newPosts = this.state.posts2
 
-                newPosts.splice(index, 1)
+                this.state.posts2.forEach((post, idx) => {
+                    if (post.id == index) {
+                        newPosts.splice(idx, 1)
+                    }
+                })
 
                 this.setState({
-                    posts: newPosts
+                    posts2: newPosts
                 })
+
+                this.searchForTitle2(this.state.keywords)
 
                 console.log(response)
             })
@@ -81,19 +90,9 @@ class Users extends Component {
             })
     }
 
-    searchForTitle(e) {
+    searchForTitle2(keywords) {
         let newPosts = [],
-            val = e.target.value
-
-        if (!this.state.isSet) {
-            this.setState({
-                posts2: this.state.posts
-            })
-
-            this.setState({
-                isSet: true
-            })
-        }
+            val = keywords
 
         this.state.posts2.forEach(post => {
             if (!post.title.includes(val)) return null
@@ -106,21 +105,42 @@ class Users extends Component {
         })
     }
 
+    searchForTitle(e) {
+        let newPosts = [],
+            val = e.target.value
+
+        this.state.posts2.forEach(post => {
+            if (!post.title.includes(val)) return null
+
+            newPosts.push(post)
+        })
+
+        this.setState({
+            keywords: val,
+            posts: newPosts
+        })
+    }
+
     handleEditTitle(index, title) {
         let path = `${process.env.REACT_APP_API_PLACEHOLDER}/posts/${index + 1}`
-        console.log(path)
 
         if (!window.confirm('Are you want to edit title of the post?')) return
 
         axios.put(path)
             .then(response => {
-                let newPosts = this.state.posts
+                let newPosts = this.state.posts2
 
-                newPosts[index].title = title
+                this.state.posts2.forEach((post, idx) => {
+                    if (post.id == index) {
+                        newPosts[idx].title = title
+                    }
+                })
 
                 this.setState({
-                    posts: newPosts
+                    posts2: newPosts
                 })
+
+                this.searchForTitle2(this.state.keywords)
 
                 console.log(response)
             })
@@ -137,13 +157,19 @@ class Users extends Component {
 
         axios.put(path)
             .then(response => {
-                let newPosts = this.state.posts
+                let newPosts = this.state.posts2
 
-                newPosts[index].body = body
+                this.state.posts2.forEach((post, idx) => {
+                    if (post.id == index) {
+                        newPosts[idx].body = body
+                    }
+                })
 
                 this.setState({
-                    posts: newPosts
+                    posts2: newPosts
                 })
+
+                this.searchForTitle2(this.state.keywords)
 
                 console.log(response)
             })
@@ -173,7 +199,8 @@ class Users extends Component {
                 })
 
                 this.setState({
-                    index: this.state.posts.length
+                    index: this.state.posts[this.state.posts.length - 1].id,
+                    posts2: this.state.posts
                 })
 
                 console.log(res)
@@ -237,7 +264,11 @@ class Users extends Component {
                             marginTop: '25px'
                         }}>
                             <Form.Group>
-                                <Form.Control type="text" placeholder="Search for title..." onChange={e => this.searchForTitle(e)} />
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Search for title..."
+                                    value={this.state.keywords}
+                                    onChange={e => this.searchForTitle(e)} />
                             </Form.Group>
                         </Form>
                     </div>
@@ -249,7 +280,7 @@ class Users extends Component {
                         }}
                     >
                         {
-                            this.state.posts.map((post, index) => {
+                            this.state.posts.map((post) => {
                                 if (parseInt(post.userId) != this.state.userId) {
                                     return null
                                 }
@@ -258,7 +289,7 @@ class Users extends Component {
                                     <Cards2
                                         key={post.id}
                                         post={post}
-                                        idx={index}
+                                        idx={post.id}
                                         handleEditBody={this.handleEditBody}
                                         handleEditTitle={this.handleEditTitle}
                                         handleDeletePost={this.handleDeletePost}
