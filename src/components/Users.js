@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import Cards2 from './Cards2'
-import Pagination from 'react-bootstrap/Pagination'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import NewPost from './NewPost'
 import Desert from '../assets/images/desert.jpg'
+import Form from 'react-bootstrap/Form'
 
 class Users extends Component {
     constructor(props) {
@@ -15,6 +15,8 @@ class Users extends Component {
         this.props = props
         this.state = {
             posts: [],
+            isSet: false,
+            posts2: [],
             index: 0,
             userId: 0
         }
@@ -23,6 +25,7 @@ class Users extends Component {
         this.handleEditBody = this.handleEditBody.bind(this)
         this.handleDeletePost = this.handleDeletePost.bind(this)
         this.handleAddPost = this.handleAddPost.bind(this)
+        this.searchForTitle = this.searchForTitle.bind(this)
     }
 
     handleAddPost(title, body) {
@@ -76,6 +79,31 @@ class Users extends Component {
             .catch(error => {
                 console.log(error)
             })
+    }
+
+    searchForTitle(e) {
+        let newPosts = [],
+            val = e.target.value
+
+        if (!this.state.isSet) {
+            this.setState({
+                posts2: this.state.posts
+            })
+
+            this.setState({
+                isSet: true
+            })
+        }
+
+        this.state.posts2.forEach(post => {
+            if (!post.title.includes(val)) return null
+
+            newPosts.push(post)
+        })
+
+        this.setState({
+            posts: newPosts
+        })
     }
 
     handleEditTitle(index, title) {
@@ -204,6 +232,15 @@ class Users extends Component {
                         overflow: 'scroll'
                     }}
                 >
+                    <div>
+                        <Form style={{
+                            marginTop: '25px'
+                        }}>
+                            <Form.Group>
+                                <Form.Control type="text" placeholder="Search for title..." onChange={e => this.searchForTitle(e)} />
+                            </Form.Group>
+                        </Form>
+                    </div>
                     <div
                         className="d-flex justify-content-between"
                         style={{
@@ -213,12 +250,8 @@ class Users extends Component {
                     >
                         {
                             this.state.posts.map((post, index) => {
-                                console.log('hai')
-                                console.log(post.userId)
-                                console.log(this.state.userId)
-                                console.log(post.userId != this.state.userId)
-                                if (post.userId != this.state.userId) {
-                                    return
+                                if (parseInt(post.userId) != this.state.userId) {
+                                    return null
                                 }
 
                                 return (
