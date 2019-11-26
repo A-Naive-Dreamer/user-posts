@@ -15,6 +15,13 @@ export default class NewPost extends Component {
 
         this.handleChange1 = this.handleChange1.bind(this)
         this.handleChange2 = this.handleChange2.bind(this)
+        this.handleChange3 = this.handleChange3.bind(this)
+    }
+
+    handleChange3(e) {
+        this.setState({
+            title: e.target.value
+        })
     }
 
     handleChange1(e) {

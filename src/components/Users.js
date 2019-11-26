@@ -18,7 +18,9 @@ class Users extends Component {
             posts2: [],
             keywords: '',
             index: 0,
-            userId: 0
+            userId: 0,
+            title: '',
+            body: ''
         }
 
         this.handleEditTitle = this.handleEditTitle.bind(this)
@@ -27,6 +29,20 @@ class Users extends Component {
         this.handleAddPost = this.handleAddPost.bind(this)
         this.searchForTitle = this.searchForTitle.bind(this)
         this.searchForTitle2 = this.searchForTitle2.bind(this)
+        this.handleAddTitle = this.handleAddTitle.bind(this)
+        this.handleAddBody = this.handleAddBody.bind(this)
+    }
+
+    handleAddTitle(e) {
+        this.setState({
+            title: e.target.value
+        })
+    }
+
+    handleAddBody(e) {
+        this.setState({
+            title: e.target.value
+        })
     }
 
     handleAddPost(title, body) {
@@ -43,7 +59,7 @@ class Users extends Component {
 
                 newPosts.push({
                     id: index,
-                    userId: index,
+                    userId: this.state.userId,
                     title: title,
                     body: body
                 })
@@ -53,7 +69,7 @@ class Users extends Component {
                     posts2: newPosts
                 })
 
-                this.searchForTitle2(this.state.keywords)
+                this.searchForTitle2('')
 
                 console.log(response)
             })
