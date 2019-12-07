@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import Card from 'react-bootstrap/Card'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import {
+    Button,
+    Card,
+    Form
+} from 'react-bootstrap'
 
 export default class Cards2 extends Component {
     constructor(props) {
@@ -81,11 +83,9 @@ export default class Cards2 extends Component {
                         this.props.post.title
                     }
                 </Card.Title>
-                <Form
-                    style={{
-                        display: (this.state.isVisible1 ? 'none' : 'block')
-                    }}
-                >
+                <Form style={{
+                    display: (this.state.isVisible1 ? 'none' : 'block')
+                }}>
                     <Form.Group>
                         <Form.Control
                             type="text"
@@ -129,11 +129,9 @@ export default class Cards2 extends Component {
                             this.props.post.body
                         }
                     </Card.Text>
-                    <Form
-                        style={{
-                            display: (this.state.isVisible2 ? 'none' : 'block')
-                        }}
-                    >
+                    <Form style={{
+                        display: (this.state.isVisible2 ? 'none' : 'block')
+                    }}>
                         <Form.Group>
                             <textarea
                                 cols="17"
@@ -141,7 +139,7 @@ export default class Cards2 extends Component {
                                 onChange={e => this.handleChange2(e)}
                                 placeholder="Type your post in here..."
                                 value={this.state.body}
-                            ></textarea>
+                            />
                         </Form.Group>
                         <Form.Group>
                             <Button

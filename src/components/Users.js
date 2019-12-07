@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import Cards2 from './Cards2'
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
 import NewPost from './NewPost'
 import Desert from '../assets/images/desert.jpg'
-import Form from 'react-bootstrap/Form'
+import {
+    Form,
+    Col,
+    Row
+} from 'react-bootstrap'
 
 class Users extends Component {
     constructor(props) {
@@ -68,10 +70,7 @@ class Users extends Component {
                     index: index,
                     posts2: newPosts
                 })
-
                 this.searchForTitle2('')
-
-                console.log(response)
             })
             .catch(error => {
                 console.log(error)
@@ -88,7 +87,7 @@ class Users extends Component {
                 let newPosts = this.state.posts2
 
                 this.state.posts2.forEach((post, idx) => {
-                    if (post.id == index) {
+                    if (parseInt(post.id) === index) {
                         newPosts.splice(idx, 1)
                     }
                 })
@@ -96,10 +95,7 @@ class Users extends Component {
                 this.setState({
                     posts2: newPosts
                 })
-
                 this.searchForTitle2(this.state.keywords)
-
-                console.log(response)
             })
             .catch(error => {
                 console.log(error)
@@ -147,7 +143,7 @@ class Users extends Component {
                 let newPosts = this.state.posts2
 
                 this.state.posts2.forEach((post, idx) => {
-                    if (post.id == index) {
+                    if (parseInt(post.id) === index) {
                         newPosts[idx].title = title
                     }
                 })
@@ -155,10 +151,7 @@ class Users extends Component {
                 this.setState({
                     posts2: newPosts
                 })
-
                 this.searchForTitle2(this.state.keywords)
-
-                console.log(response)
             })
             .catch(error => {
                 console.log(error)
@@ -167,7 +160,6 @@ class Users extends Component {
 
     handleEditBody(index, body) {
         let path = `${process.env.REACT_APP_API_PLACEHOLDER}/posts/${index + 1}`
-        console.log(path)
 
         if (!window.confirm('Are you want to edit body of the post?')) return
 
@@ -176,7 +168,7 @@ class Users extends Component {
                 let newPosts = this.state.posts2
 
                 this.state.posts2.forEach((post, idx) => {
-                    if (post.id == index) {
+                    if (parseInt(post.id) === index) {
                         newPosts[idx].body = body
                     }
                 })
@@ -184,10 +176,7 @@ class Users extends Component {
                 this.setState({
                     posts2: newPosts
                 })
-
                 this.searchForTitle2(this.state.keywords)
-
-                console.log(response)
             })
             .catch(error => {
                 console.log(error)
@@ -218,29 +207,6 @@ class Users extends Component {
                     index: this.state.posts[this.state.posts.length - 1].id,
                     posts2: this.state.posts
                 })
-
-                console.log(res)
-
-                // let newPosts = [],
-                //     x = 0,
-                //     y = 4
-
-                // while (this.state.posts.length > x) {
-                //     if ((this.state.posts.length - x) >= 4) {
-                //         newPosts.push(this.state.posts.slice(x, y))
-                //     } else {
-                //         newPosts.push(this.state.posts.slice(x, x + (this.state.posts.length - x)))
-                //     }
-
-                //     x += 4
-                //     y += 4
-                // }
-
-                // console.log(newPosts)
-
-                // this.setState({
-                //     posts: newPosts[0]
-                // })
             })
             .catch((error) => {
                 console.log(error)
@@ -248,9 +214,14 @@ class Users extends Component {
     }
 
     render() {
-
         return (
-            <Row noGutters={false}>
+            <Row
+                noGutters={false}
+                style={{
+                    margin: '0 auto',
+                    width: '95%'
+                }}
+            >
                 <Col
                     md={{
                         span: 4,
@@ -297,7 +268,7 @@ class Users extends Component {
                     >
                         {
                             this.state.posts.map((post) => {
-                                if (parseInt(post.userId) != this.state.userId) {
+                                if (parseInt(post.userId) !== parseInt(this.state.userId)) {
                                     return null
                                 }
 
@@ -316,7 +287,7 @@ class Users extends Component {
                         }
                     </div>
                 </Col>
-            </Row>
+            </Row >
         )
     }
 }

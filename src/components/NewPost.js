@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import {
+    Form,
+    Button
+} from 'react-bootstrap'
 
 export default class NewPost extends Component {
     constructor(props) {
         super(props)
 
         this.props = props
-
         this.state = {
             title: '',
             body: ''
@@ -16,12 +17,6 @@ export default class NewPost extends Component {
         this.handleChange1 = this.handleChange1.bind(this)
         this.handleChange2 = this.handleChange2.bind(this)
         this.handleChange3 = this.handleChange3.bind(this)
-    }
-
-    handleChange3(e) {
-        this.setState({
-            title: e.target.value
-        })
     }
 
     handleChange1(e) {
@@ -33,6 +28,12 @@ export default class NewPost extends Component {
     handleChange2(e) {
         this.setState({
             body: e.target.value
+        })
+    }
+
+    handleChange3(e) {
+        this.setState({
+            title: e.target.value
         })
     }
 
@@ -56,7 +57,7 @@ export default class NewPost extends Component {
                         name="body"
                         placeholder="Type post content here..."
                         onChange={e => this.handleChange2(e)}
-                    ></textarea>
+                    />
                 </Form.Group>
                 <Form.Group>
                     <Button

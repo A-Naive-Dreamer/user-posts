@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Cards1 from './Cards1'
-import Carousel from 'react-bootstrap/Carousel'
-import Jumbotron from 'react-bootstrap/Jumbotron'
-import FormControl from 'react-bootstrap/FormControl'
+import {
+    Carousel,
+    Jumbotron,
+    FormControl
+} from 'react-bootstrap'
 
 export default class List extends Component {
     constructor(props) {
@@ -20,18 +22,10 @@ export default class List extends Component {
     }
 
     search(e) {
-        let users = this.state.users2,
-            newArray = []
-
-        users.forEach(user => {
-            if (user.name.toLowerCase().includes(e.target.value.toLowerCase())) {
-                newArray.push(user)
-            }
-        })
+        let val = e.target.value
 
         this.setState({
-            users: newArray,
-            keywords: e.target.value
+            keywords: val
         })
     }
 
@@ -46,10 +40,6 @@ export default class List extends Component {
             .catch(error => console.log(error))
     }
 
-    updateName(id) {
-        let newArray = []
-    }
-
     render() {
         return (
             <div>
@@ -60,17 +50,29 @@ export default class List extends Component {
                     placeholder="Type keywords here..."
                     onChange={e => this.search(e)}
                 />
-                <Jumbotron className="bg-dark" style={{
-                    height: window.innerHeight + 'px'
-                }}>
+                <Jumbotron
+                    className="bg-dark"
+                    style={{
+                        height: window.innerHeight + 'px'
+                    }}
+                >
                     <Carousel indicators={false}>
                         {
                             this.state.users.map((user) => {
-                                return (
-                                    <Carousel.Item key={user.id}>
-                                        <Cards1 user={user} name={this.state.name} />
-                                    </Carousel.Item>
-                                )
+                                if (
+                                    user.name
+                                        .toLowerCase()
+                                        .includes(this.state.keywords.toLowerCase())
+                                ) {
+                                    return (
+                                        <Carousel.Item key={user.id}>
+                                            <Cards1
+                                                user={user}
+                                                name={this.state.name}
+                                            />
+                                        </Carousel.Item>
+                                    )
+                                }
                             })
                         }
                     </Carousel>

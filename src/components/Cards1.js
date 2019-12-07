@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import Card from 'react-bootstrap/Card'
-import Carousel from 'react-bootstrap/Carousel'
 import { Link } from 'react-router-dom'
+import {
+    Carousel,
+    Card
+} from 'react-bootstrap'
 
 export default class Cards1 extends Component {
     constructor(props) {
@@ -12,13 +14,17 @@ export default class Cards1 extends Component {
 
     render() {
         return (
-            <Card style={{
-                borderRadius: '10px',
-                boxShadow: '5px 5px 10px black',
-                maxHeight: '400px',
-                overflow: 'auto',
-                width: '275px'
-            }} className="d-block mx-auto" key={this.props.user.id}>
+            <Card
+                style={{
+                    borderRadius: '10px',
+                    boxShadow: '5px 5px 10px black',
+                    maxHeight: '400px',
+                    overflow: 'auto',
+                    width: '275px'
+                }}
+                className="d-block mx-auto"
+                key={this.props.user.id}
+            >
                 <Card.Title className="text-center text-danger">
                     <h2 style={{
                         fontFamily: 'Aladin'
@@ -29,23 +35,30 @@ export default class Cards1 extends Component {
                     </h2>
                 </Card.Title>
                 <Card.Body className="bg-info">
-                    <Carousel indicators={false} interval={0}>
+                    <Carousel
+                        indicators={false}
+                        interval={0}
+                    >
                         <Carousel.Item className="bio">
                             <h5>
                                 Username
                             </h5>
                         </Carousel.Item>
                         <Carousel.Item className="description">
-                            @{
+                            @
+                            {
                                 this.props.user.username
                             }
                         </Carousel.Item>
                     </Carousel>
-                    <Carousel indicators={false} interval={0}>
+                    <Carousel
+                        indicators={false}
+                        interval={0}
+                    >
                         <Carousel.Item className="bio">
                             <h5>
                                 Street
-                                </h5>
+                            </h5>
                         </Carousel.Item>
                         <Carousel.Item className="description">
                             {
@@ -53,11 +66,14 @@ export default class Cards1 extends Component {
                             }
                         </Carousel.Item>
                     </Carousel>
-                    <Carousel indicators={false} interval={0}>
+                    <Carousel
+                        indicators={false}
+                        interval={0}
+                    >
                         <Carousel.Item className="bio">
                             <h5>
                                 City
-                                </h5>
+                            </h5>
                         </Carousel.Item>
                         <Carousel.Item className="description">
                             {
@@ -65,11 +81,14 @@ export default class Cards1 extends Component {
                             }
                         </Carousel.Item>
                     </Carousel>
-                    <Carousel indicators={false} interval={0}>
+                    <Carousel
+                        indicators={false}
+                        interval={0}
+                    >
                         <Carousel.Item className="bio">
                             <h5>
                                 ZIP Code
-                                </h5>
+                            </h5>
                         </Carousel.Item>
                         <Carousel.Item className="description">
                             {
@@ -77,11 +96,14 @@ export default class Cards1 extends Component {
                             }
                         </Carousel.Item>
                     </Carousel>
-                    <Carousel indicators={false} interval={0}>
+                    <Carousel
+                        indicators={false}
+                        interval={0}
+                    >
                         <Carousel.Item className="bio">
                             <h5>
                                 Email
-                                </h5>
+                            </h5>
                         </Carousel.Item>
                         <Carousel.Item className="description">
                             {
@@ -89,11 +111,14 @@ export default class Cards1 extends Component {
                             }
                         </Carousel.Item>
                     </Carousel>
-                    <Carousel indicators={false} interval={0}>
+                    <Carousel
+                        indicators={false}
+                        interval={0}
+                    >
                         <Carousel.Item className="bio">
                             <h5>
                                 Phone
-                                </h5>
+                            </h5>
                         </Carousel.Item>
                         <Carousel.Item className="description">
                             {
@@ -101,11 +126,14 @@ export default class Cards1 extends Component {
                             }
                         </Carousel.Item>
                     </Carousel>
-                    <Carousel indicators={false} interval={0}>
+                    <Carousel
+                        indicators={false}
+                        interval={0}
+                    >
                         <Carousel.Item className="bio">
                             <h5>
                                 Website
-                                </h5>
+                            </h5>
                         </Carousel.Item>
                         <Carousel.Item className="description">
                             {
@@ -113,11 +141,14 @@ export default class Cards1 extends Component {
                             }
                         </Carousel.Item>
                     </Carousel>
-                    <Carousel indicators={false} interval={0}>
+                    <Carousel
+                        indicators={false}
+                        interval={0}
+                    >
                         <Carousel.Item className="bio">
                             <h5>
                                 Company
-                                </h5>
+                            </h5>
                         </Carousel.Item>
                         <Carousel.Item className="description">
                             {
@@ -127,7 +158,10 @@ export default class Cards1 extends Component {
                     </Carousel>
                 </Card.Body>
                 <Card.Footer>
-                    <Link className="text-success" to={`/users/${this.props.user.id}/pages/1`}>
+                    <Link
+                        className="text-success"
+                        to={`/users/${this.props.user.id}/pages/1`}
+                    >
                         Read More...
                     </Link>
                 </Card.Footer>
